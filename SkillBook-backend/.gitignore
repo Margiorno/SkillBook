@@ -1,0 +1,17 @@
+/build/
+**/build/
+/out/
+.gradle/
+
+.idea/
+*.iml
+*.iws
+*.ipr
+
+.DS_Store
+Thumbs.db
+
+*.log
+
+gradlew
+gradlew.bat
