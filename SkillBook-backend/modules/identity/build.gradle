@@ -1,0 +1,5 @@
+dependencies {
+    implementation project(':library')
+
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-client:4.0.2")
+}
