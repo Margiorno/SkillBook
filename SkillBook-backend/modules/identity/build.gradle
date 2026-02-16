@@ -1,3 +1,7 @@
+plugins {
+    id 'com.netflix.dgs.codegen' version "${dgsCodegenVersion}"
+}
+
 dependencies {
     implementation project(':modules:common')
 
@@ -10,4 +14,9 @@ dependencies {
     runtimeOnly "io.jsonwebtoken:jjwt-jackson:${jjwtVersion}"
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
+}
+
+generateJava {
+    packageName = 'com.mz.identity.generated'
+    generateClient = true
 }
