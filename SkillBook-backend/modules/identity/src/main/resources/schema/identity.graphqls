@@ -1,0 +1,20 @@
+type Mutation {
+    login(input: LoginInput!): AuthPayload!
+}
+
+enum AuthType {
+    GOOGLE
+#    FACEBOOK
+#    PASSWORD
+}
+
+input LoginInput {
+    authType: AuthType!
+    token: String       # GOOGLE / FACEBOOK
+    email: String       # PASSWORD
+    password: String    # PASSWORD
+}
+
+type AuthPayload {
+    token: String!
+}
