@@ -22,7 +22,7 @@ public class JwtService {
         SecretKey key = Keys.hmacShaKeyFor(jwtProperties.getSecret().getBytes(StandardCharsets.UTF_8));
 
         return Jwts.builder()
-                .subject(principal.getUserId().toString())
+                .subject(principal.getUserId())
                 .claim("email", principal.getEmail())
                 .claim("roles", principal.getRoles())
                 .issuedAt(new Date())

@@ -27,14 +27,11 @@ public class Account {
     private String passwordHash;
     private String googleId;
 
+    @Builder.Default
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 
+    @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-    }
 }
