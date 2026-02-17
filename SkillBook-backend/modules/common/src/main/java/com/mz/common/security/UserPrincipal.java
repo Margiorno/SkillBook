@@ -2,13 +2,13 @@ package com.mz.common.security;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 import java.util.UUID;
 
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Builder
 public class UserPrincipal {
     private final String userId;
