@@ -6,6 +6,7 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import com.mz.common.security.Role;
 import com.mz.common.security.UserPrincipal;
+import com.mz.identity.auth.AuthRequest;
 import com.mz.identity.auth.AuthStrategy;
 import com.mz.identity.config.GoogleProperties;
 import com.mz.identity.enums.AuthType;
@@ -32,7 +33,9 @@ public class GoogleAuthStrategy implements AuthStrategy {
     }
 
     @Override
-    public UserPrincipal authenticate(String token) {
+    public UserPrincipal authenticate(AuthRequest request) {
+        String token = request.getToken();
+
         try {
             GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(
                     new NetHttpTransport(),

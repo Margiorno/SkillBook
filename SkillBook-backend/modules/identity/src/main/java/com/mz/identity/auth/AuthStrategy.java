@@ -6,5 +6,5 @@ import com.mz.identity.enums.AuthType;
 public interface AuthStrategy {
     boolean supports(AuthType authType);
 
-    UserPrincipal authenticate(String token);
+    UserPrincipal authenticate(AuthRequest request);
 }
