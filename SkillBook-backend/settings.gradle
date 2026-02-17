@@ -1,4 +1,6 @@
 rootProject.name = 'skillBook'
 
-include 'library'
 include 'application'
+
+include 'modules:common'
+include 'modules:identity'

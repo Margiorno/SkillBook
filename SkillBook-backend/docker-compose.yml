@@ -1,0 +1,37 @@
+services:
+  db:
+    image: postgres:15
+    container_name: skillbook-db
+    ports:
+      - "${DB_PORT}:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # Set via environment; do not use default or trivial passwords.
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - skillbook-net
+
+  app:
+    build: .
+    container_name: skillbook-app
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${DB_NAME}
+      POSTGRES_DB: ${DB_NAME}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      JWT_SECRET: ${JWT_SECRET}
+      BEARER_EXPIRATION: ${BEARER_EXPIRATION}
+    depends_on:
+      - db
+    networks:
+      - skillbook-net
+
+networks:
+  skillbook-net:
+    driver: bridge
+
+volumes:
+  postgres_data:

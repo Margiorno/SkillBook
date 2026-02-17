@@ -1,6 +1,6 @@
 plugins {
-    id 'org.springframework.boot' version '3.2.3' apply false
-    id 'io.spring.dependency-management' version '1.1.4' apply false
+    id 'org.springframework.boot' version "${springBootVersion}" apply false
+    id 'io.spring.dependency-management' version "${springDependencyManagementVersion}" apply false
     id 'java'
 }
 
@@ -18,11 +18,16 @@ subprojects {
     apply plugin: 'java-library'
     apply plugin: 'io.spring.dependency-management'
 
-    sourceCompatibility = '21'
+    sourceCompatibility = javaVersion
+
+    tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs.add('-parameters')
+    }
 
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.boot:spring-boot-dependencies:3.2.3"
+            mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+            mavenBom "com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:${dgsVersion}"
         }
     }
 
