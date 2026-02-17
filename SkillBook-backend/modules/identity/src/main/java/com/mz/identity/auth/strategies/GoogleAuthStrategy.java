@@ -50,7 +50,6 @@ public class GoogleAuthStrategy implements AuthStrategy {
 
                 log.info("Verified google user: {}", email);
 
-
                 return new UserPrincipal(
                         userId,
                         email,
