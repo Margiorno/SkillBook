@@ -25,7 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GoogleAuthStrategy implements AuthStrategy {
 
-    private final GoogleProperties googleProperties;
+    private final GoogleIdTokenVerifier googleIdTokenVerifier;
 
     @Override
     public boolean supports(AuthType authType) {
@@ -37,13 +37,7 @@ public class GoogleAuthStrategy implements AuthStrategy {
         String token = request.getToken();
 
         try {
-            GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(
-                    new NetHttpTransport(),
-                    new GsonFactory())
-                    .setAudience(Collections.singletonList(googleProperties.getClientId()))
-                    .build();
-
-            GoogleIdToken idToken = verifier.verify(token);
+            GoogleIdToken idToken = googleIdTokenVerifier.verify(token);
 
             if (idToken != null) {
                 GoogleIdToken.Payload payload = idToken.getPayload();
@@ -63,8 +57,9 @@ public class GoogleAuthStrategy implements AuthStrategy {
                 throw new InvalidGoogleTokenException("Invalid Google ID Token");
             }
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (GeneralSecurityException | IOException e) {
+            log.error("Failed to verify Google ID Token", e);
+            throw new InvalidGoogleTokenException("Invalid Google ID Token");
         }
     }
 }

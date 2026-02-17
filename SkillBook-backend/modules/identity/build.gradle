@@ -6,6 +6,7 @@ dependencies {
     implementation project(':modules:common')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter'
 
 //    GOOGLE LOGIN CLIENT
