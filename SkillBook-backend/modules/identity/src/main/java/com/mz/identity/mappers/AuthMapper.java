@@ -5,6 +5,7 @@ import com.mz.identity.generated.types.LoginInput;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.ValueMapping;
 
 @Mapper(componentModel = "spring")
 public interface AuthMapper {
@@ -17,6 +18,7 @@ public interface AuthMapper {
     })
     AuthRequest toCommand(LoginInput input);
 
+    @ValueMapping(source = "GOOGLE", target = "GOOGLE")
     com.mz.identity.enums.AuthType map(
             com.mz.identity.generated.types.AuthType authType
     );
