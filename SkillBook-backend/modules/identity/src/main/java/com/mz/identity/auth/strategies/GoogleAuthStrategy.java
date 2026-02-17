@@ -43,7 +43,7 @@ public class GoogleAuthStrategy implements AuthStrategy {
 
             if (idToken != null) {
                 GoogleIdToken.Payload payload = idToken.getPayload();
-                log.info("Verified google user: {}", payload.getEmail());
+                log.debug("Verified google user: {}", payload.getEmail());
 
                 return new UserPrincipal(
                         payload.getSubject(),
