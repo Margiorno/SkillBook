@@ -7,6 +7,6 @@ FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 COPY --from=build /home/gradle/src/application/build/libs/*.jar app.jar
 
-ENV SPRING_PROFILES_ACTIVE=prod
+#ENV SPRING_PROFILES_ACTIVE=prod
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
