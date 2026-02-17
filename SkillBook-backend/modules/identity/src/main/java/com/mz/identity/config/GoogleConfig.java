@@ -12,10 +12,16 @@ import java.util.Collections;
 public class GoogleConfig {
 
     @Bean
-    public GoogleIdTokenVerifier googleIdTokenVerifier(GoogleProperties googleProperties) {
+    public NetHttpTransport netHttpTransport() {
+        return new NetHttpTransport();
+    }
+
+    @Bean
+    public GoogleIdTokenVerifier googleIdTokenVerifier(GoogleProperties googleProperties,
+                                                      NetHttpTransport netHttpTransport) {
 
         return new GoogleIdTokenVerifier.Builder(
-                new NetHttpTransport(),
+                netHttpTransport,
                 new GsonFactory())
                 .setAudience(Collections.singletonList(googleProperties.getClientId()))
                 .build();

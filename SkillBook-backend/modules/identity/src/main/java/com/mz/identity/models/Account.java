@@ -25,10 +25,11 @@ public class Account {
     private String email;
 
     private String passwordHash;
+    @Column(unique = true)
     private String googleId;
 
     @Builder.Default
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 
