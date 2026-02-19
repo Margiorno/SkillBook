@@ -4,6 +4,7 @@ plugins {
 
 dependencies {
     implementation project(':modules:common')
+    implementation project(':modules:security')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -11,11 +12,6 @@ dependencies {
 
 //    GOOGLE LOGIN CLIENT
     implementation "com.google.api-client:google-api-client:${googleApiClientVersion}"
-
-//    WEB TOKENS
-    implementation "io.jsonwebtoken:jjwt-api:${jjwtVersion}"
-    runtimeOnly "io.jsonwebtoken:jjwt-impl:${jjwtVersion}"
-    runtimeOnly "io.jsonwebtoken:jjwt-jackson:${jjwtVersion}"
 
 //    MAPSTRUCT
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"

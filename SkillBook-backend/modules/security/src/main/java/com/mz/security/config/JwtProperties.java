@@ -1,4 +1,4 @@
-package com.mz.identity.config;
+package com.mz.security.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
