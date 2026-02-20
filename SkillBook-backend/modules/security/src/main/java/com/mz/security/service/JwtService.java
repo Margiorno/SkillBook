@@ -1,7 +1,9 @@
-package com.mz.identity.service;
+package com.mz.security.service;
 
 import com.mz.common.security.UserPrincipal;
-import com.mz.identity.config.JwtProperties;
+
+import com.mz.security.config.JwtProperties;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Jwts;
@@ -30,5 +32,15 @@ public class JwtService {
                         Instant.now().plusMillis(jwtProperties.getBearerExpiration())))
                 .signWith(key)
                 .compact();
+    }
+
+    public Claims extractClaims(String token) {
+        SecretKey key = Keys.hmacShaKeyFor(jwtProperties.getSecret().getBytes(StandardCharsets.UTF_8));
+
+        return Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
     }
 }

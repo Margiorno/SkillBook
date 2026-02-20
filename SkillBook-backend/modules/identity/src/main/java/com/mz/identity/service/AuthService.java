@@ -9,6 +9,7 @@ import com.mz.identity.mappers.AccountMapper;
 import com.mz.identity.mappers.RoleMapper;
 import com.mz.identity.models.Account;
 import com.mz.identity.repository.AccountRepository;
+import com.mz.security.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
