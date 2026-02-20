@@ -90,8 +90,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return Collections.emptyList();
         }
         return rolesString.stream()
-                .map(Role::valueOf)
+                .map(this::parseRole)
+                .flatMap(Optional::stream)
                 .toList();
+    }
+
+    private Optional<Role> parseRole(String roleName) {
+        try {
+            return Optional.of(Role.valueOf(roleName));
+        } catch (IllegalArgumentException e) {
+            log.warn("Unknown role in JWT: {}", roleName);
+            return Optional.empty();
+        }
     }
 
     private UserPrincipal buildPrincipal(Claims claims, String userId, List<Role> roles) {
